@@ -55,9 +55,6 @@ LTexture pressSpaceTexture;
 //Texture to show who won the last game (with press SPRACE information)
 LTexture winnerTexture;
 
-//Version and producer texture
-LTexture productionTexture;
-
 //A paddle number one
 Player player1(1);
 
@@ -271,13 +268,6 @@ bool loadMedia()
 		success = false;
 	}
 
-	//Load productionTexture
-	if (!productionTexture.loadFromFile("images/production.png"))
-	{
-		printf("Failed to load productionTexture image!\n");
-		success = false;
-	}
-
 	//Open the font
 	gFont = TTF_OpenFont("fonts/JosefinSans-Italic.ttf", 50);
 	if (gFont == NULL)
@@ -316,7 +306,6 @@ void close()
 	background.free();
 	pressSpaceTexture.free();
 	winnerTexture.free();
-	productionTexture.free();
 
 	//Free global font
 	TTF_CloseFont(gFont);
@@ -464,18 +453,13 @@ int main(int argc, char* args[])
 					//Render pressSpace information
 					pressSpaceTexture.render(SCREEN_WIDTH / 2 - pressSpaceTexture.getWidth() / 2, SCREEN_HEIGHT * 3 / 4);
 
-					//When there is a winner (not after 1st match)
+					//When there is a winner (not before 1st match)
 					if (winnerName != " ") {
 						//Render winner
 						SDL_Color winnerTextColor = { 63,72,204 };
 						std::string winnerText = winnerName + " wins!";
 						winnerTexture.loadFromRenderedText(winnerText.c_str(), winnerTextColor);
 						winnerTexture.render(SCREEN_WIDTH / 2 - winnerTexture.getWidth() / 2, SCREEN_HEIGHT / 8);
-					}
-					//After 1st match
-					else {
-						//Render version and production
-						productionTexture.render(0,0);
 					}
 				}
 
