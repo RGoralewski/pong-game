@@ -40,7 +40,7 @@ private:
 	int refVel;
 
 	//Velocity increase single step (adding with every bounce to refVel)
-	static const int VELOCITY_INCREASE_STEP = 5;
+	static const int VELOCITY_INCREASE_STEP = 10;
 
 	//Initial reference velocity
 	static const int INIT_REF_VELOCITY = 500;
