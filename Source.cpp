@@ -55,6 +55,12 @@ LTexture pressSpaceTexture;
 //Texture to show who won the last game (with press SPRACE information)
 LTexture winnerTexture;
 
+//Textures to show keys for each player
+LTexture wsKeysTexture;
+LTexture arrowKeysTexture;
+
+
+
 //A paddle number one
 Player player1(1);
 
@@ -268,6 +274,20 @@ bool loadMedia()
 		success = false;
 	}
 
+	//Load wsKeysTexture
+	if (!wsKeysTexture.loadFromFile("images/ws_keys.png"))
+	{
+		printf("Failed to load wsKeysTexture image!\n");
+		success = false;
+	}
+
+	//Load arrowKeysTexture
+	if (!arrowKeysTexture.loadFromFile("images/arrow_keys.png"))
+	{
+		printf("Failed to load arrowKeysTexture image!\n");
+		success = false;
+	}
+
 	//Open the font
 	gFont = TTF_OpenFont("fonts/JosefinSans-Italic.ttf", 50);
 	if (gFont == NULL)
@@ -306,6 +326,8 @@ void close()
 	background.free();
 	pressSpaceTexture.free();
 	winnerTexture.free();
+	wsKeysTexture.free();
+	arrowKeysTexture.free();
 
 	//Free global font
 	TTF_CloseFont(gFont);
@@ -452,6 +474,10 @@ int main(int argc, char* args[])
 				else {
 					//Render pressSpace information
 					pressSpaceTexture.render(SCREEN_WIDTH / 2 - pressSpaceTexture.getWidth() / 2, SCREEN_HEIGHT * 3 / 4);
+
+					//Render keys for each player
+					wsKeysTexture.render(0, SCREEN_HEIGHT / 2 - wsKeysTexture.getHeight() / 2);
+					arrowKeysTexture.render(SCREEN_WIDTH - arrowKeysTexture.getWidth(), SCREEN_HEIGHT / 2 - arrowKeysTexture.getHeight() / 2);
 
 					//When there is a winner (not before 1st match)
 					if (winnerName != " ") {
