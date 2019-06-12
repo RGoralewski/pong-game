@@ -59,6 +59,11 @@ LTexture winnerTexture;
 LTexture wsKeysTexture;
 LTexture arrowKeysTexture;
 
+//LTextures telling for which player's are keys to control
+LTexture player1ControlTagTexture;
+LTexture player2ControlTagTexture;
+
+
 
 
 //A paddle number one
@@ -288,6 +293,20 @@ bool loadMedia()
 		success = false;
 	}
 
+	//Load player1ControlTagTexture
+	if (!player1ControlTagTexture.loadFromFile("images/player1.png"))
+	{
+		printf("Failed to load player1ControlTagTexture image!\n");
+		success = false;
+	}
+
+	//Load player2ControlTagTexture
+	if (!player2ControlTagTexture.loadFromFile("images/player2.png"))
+	{
+		printf("Failed to load player2ControlTagTexture image!\n");
+		success = false;
+	}
+
 	//Open the font
 	gFont = TTF_OpenFont("fonts/JosefinSans-Italic.ttf", 50);
 	if (gFont == NULL)
@@ -328,6 +347,8 @@ void close()
 	winnerTexture.free();
 	wsKeysTexture.free();
 	arrowKeysTexture.free();
+	player1ControlTagTexture.free();
+	player2ControlTagTexture.free();
 
 	//Free global font
 	TTF_CloseFont(gFont);
@@ -403,8 +424,6 @@ int main(int argc, char* args[])
 					{
 						matchIsOver = false;
 					}
-
-
 				}
 
 
@@ -475,9 +494,6 @@ int main(int argc, char* args[])
 					//Render pressSpace information
 					pressSpaceTexture.render(SCREEN_WIDTH / 2 - pressSpaceTexture.getWidth() / 2, SCREEN_HEIGHT * 3 / 4);
 
-					//Render keys for each player
-					wsKeysTexture.render(0, SCREEN_HEIGHT / 2 - wsKeysTexture.getHeight() / 2);
-					arrowKeysTexture.render(SCREEN_WIDTH - arrowKeysTexture.getWidth(), SCREEN_HEIGHT / 2 - arrowKeysTexture.getHeight() / 2);
 
 					//When there is a winner (not before 1st match)
 					if (winnerName != " ") {
@@ -486,6 +502,16 @@ int main(int argc, char* args[])
 						std::string winnerText = winnerName + " wins!";
 						winnerTexture.loadFromRenderedText(winnerText.c_str(), winnerTextColor);
 						winnerTexture.render(SCREEN_WIDTH / 2 - winnerTexture.getWidth() / 2, SCREEN_HEIGHT / 8);
+					}
+					//Before 1st match
+					else {
+						//Render control tags
+						player1ControlTagTexture.render(0, SCREEN_HEIGHT / 2 - wsKeysTexture.getHeight());
+						player2ControlTagTexture.render(SCREEN_WIDTH - player2ControlTagTexture.getWidth(), SCREEN_HEIGHT / 2 - arrowKeysTexture.getHeight());
+
+						//Render keys for each player
+						wsKeysTexture.render(0, SCREEN_HEIGHT / 2 - wsKeysTexture.getHeight() / 2);
+						arrowKeysTexture.render(SCREEN_WIDTH - arrowKeysTexture.getWidth(), SCREEN_HEIGHT / 2 - arrowKeysTexture.getHeight() / 2);
 					}
 				}
 
