@@ -3,6 +3,7 @@
 
 ## General info
 There are two players, one ball and a match to win. First who score 11 points wins. Graphics is 100% Paint. :)
+Aim was to do the simpliest game to learn programming.
 
 ## Screenshots
 ![Screenshot](./images/screenshot.png)
@@ -12,7 +13,7 @@ There are two players, one ball and a match to win. First who score 11 points wi
 * SDL 2.0
 
 ## Status
-Project is _in progress_. There will appear new version of the game with modified graphics and improved ball movement.
+Project is _suspended_. In the next version maybe there will be limited time of the match.
 
 ## Inspiration
-Do simple game to learn programming.
+Classic arcade game Pong and the colours from Miami Vice.
